@@ -3,10 +3,10 @@
         var ComputerChoices = ["Rock","Paper","Scissors"];
         return ComputerChoices[Math.floor(Math.random()*ComputerChoices.length)];
     }
-    function OneRoundOfRPS(playerSelection, computerSelection) {
+    function OneRoundOfRPS(playerSelection,computerSelection) {
         //rock
         if (playerSelection.toLowerCase() == "rock"  && computerSelection.toLowerCase() == "paper") {
-            return("You Lose! Paper beats Rock");
+            return("You Lose!");
         }
         if (playerSelection.toLowerCase() == "rock"  && computerSelection.toLowerCase() == "scissors") {
             return("You Win!");
@@ -35,5 +35,29 @@
             return("You Lose!");
         }
         
+    }
+
+    function game() {
+        var PlayerWIns = 0;
+        var ComputerWIns=0;
+        for (let  i= 0;  i< 5; i++) {
+            var playerSelection = prompt("Your Choice?");
+            var computerChoice = getComputerChoice();
+            OneRoundOfRPS(playerSelection, computerChoice);
+            if (OneRoundOfRPS(playerSelection, computerChoice) =="You Win!") {
+                PlayerWIns++;
+                console.log("You Win! Player:" + PlayerWIns + ", Computer:" + ComputerWIns);
+            }
+            if (OneRoundOfRPS(playerSelection, computerChoice) == "You Lose!") {
+                ComputerWIns++;
+                console.log("You Lose! Player:" + PlayerWIns + ", Computer:" + ComputerWIns);  
+            }
+            if (OneRoundOfRPS(playerSelection, computerChoice) == "Draw") {
+                
+                console.log("Draw Player:" + PlayerWIns + ", Computer:" + ComputerWIns);  
+            }
+            
+        }
+        console.log("Final Points Player:" + PlayerWIns + ", Computer:" + ComputerWIns);
     }
 </script>
