@@ -1,61 +1,126 @@
+<html>
+<body>
+<button id="Rock">Rock</button>
+<button id="Paper">Paper</button>
+<button id="Scissors">Scissors</button>
+<div class="Results"> 
+
+</div>
+<div class="Score">
+    Computer: 0 Spieler: 0
+</div>
+</body>
+</html>
+
 <script>
+    var PlayerWIns = 0;
+    var ComputerWIns=0;
+    var ComputerChoices = ["Rock","Paper","Scissors"];
+    document.getElementById("Rock").addEventListener("click", function(){
+        OneRoundOfRPS("Rock", getComputerChoice())
+    });
+    document.getElementById("Paper").addEventListener("click", function(){
+        OneRoundOfRPS("Paper", getComputerChoice())
+    });
+    document.getElementById("Scissors").addEventListener("click", function(){
+        OneRoundOfRPS("Scissors", getComputerChoice())
+    });
+    
     function getComputerChoice() {
-        var ComputerChoices = ["Rock","Paper","Scissors"];
         return ComputerChoices[Math.floor(Math.random()*ComputerChoices.length)];
     }
+
     function OneRoundOfRPS(playerSelection,computerSelection) {
+        
         //rock
         if (playerSelection.toLowerCase() == "rock"  && computerSelection.toLowerCase() == "paper") {
-            return("You Lose!");
+            document.querySelector("div").innerHTML = "You Lose!"
+            ComputerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
+        
+            
         }
         if (playerSelection.toLowerCase() == "rock"  && computerSelection.toLowerCase() == "scissors") {
-            return("You Win!");
+            document.querySelector("div").innerHTML = "You Win!"
+            PlayerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
+           
         }
         if (playerSelection.toLowerCase() == "rock"  && computerSelection.toLowerCase() == "rock") {
-            return("Draw");
+            document.querySelector("div").innerHTML = "Draw"
+            
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
+            
         }
         //paper
         if (playerSelection.toLowerCase() == "paper"  && computerSelection.toLowerCase() == "scissors") {
-            return("You Lose!");
+            document.querySelector("div").innerHTML = "You Lose!"
+            ComputerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         if (playerSelection.toLowerCase() == "paper"  && computerSelection.toLowerCase() == "rock") {
-            return("You Win!");
+            document.querySelector("div").innerHTML = "You Win!"
+            PlayerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         if (playerSelection.toLowerCase() == "paper"  && computerSelection.toLowerCase() == "paper") {
-            return("Draw");
+            document.querySelector("div").innerHTML = "Draw"
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         //scissors
         if (playerSelection.toLowerCase() == "scissors"  && computerSelection.toLowerCase() == "scissors") {
-            return("Draw");
+            document.querySelector("div").innerHTML = "Draw!"
+            ComputerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         if (playerSelection.toLowerCase() == "scissors"  && computerSelection.toLowerCase() == "paper") {
-            return("You Win!");
+            document.querySelector("div").innerHTML = "You Win!"
+            PlayerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         if (playerSelection.toLowerCase() == "scissors"  && computerSelection.toLowerCase() == "rock") {
-            return("You Lose!");
+            document.querySelector("div").innerHTML = "You Lose!"
+            ComputerWIns++;
+            document.querySelector("div.Score").innerHTML ="Computer:" + ComputerWIns + "Player:" + PlayerWIns
+            checkforEnding();
         }
         
     }
 
-    function game() {
-        var PlayerWIns = 0;
-        var ComputerWIns=0;
-        for (let  i= 0;  i< 5; i++) {
-            var playerSelection = prompt("Your Choice?");
-            var computerChoice = getComputerChoice();
-            OneRoundOfRPS(playerSelection, computerChoice);
-            if (OneRoundOfRPS(playerSelection, computerChoice) =="You Win!") {
-                PlayerWIns++;
-                console.log("You Win! Player:" + PlayerWIns + ", Computer:" + ComputerWIns);
-            }
-            if (OneRoundOfRPS(playerSelection, computerChoice) == "You Lose!") {
-                ComputerWIns++;
-                console.log("You Lose! Player:" + PlayerWIns + ", Computer:" + ComputerWIns);  
-            }
-            if (OneRoundOfRPS(playerSelection, computerChoice) == "Draw") {
-                
-                console.log("Draw Player:" + PlayerWIns + ", Computer:" + ComputerWIns);  
-            }
-            
+    function checkforEnding(){
+        if (PlayerWIns == 5){
+            document.querySelector("div.Results").innerHTML = "You have slain the COmputer"
+            document.getElementById("Rock").removeEventListener("click", function(){
+        OneRoundOfRPS("Rock", getComputerChoice())
+    });
+    document.getElementById("Paper").removeEventListener("click", function(){
+        OneRoundOfRPS("Paper", getComputerChoice())
+    });
+    document.getElementById("Scissors").removeEventListener("click", function(){
+        OneRoundOfRPS("Scissors", getComputerChoice())
+    });
+        } else if(ComputerWIns == 5){
+            document.querySelector("div.Results").innerHTML = "The Computer is victorious"
+            document.getElementById("Rock").removeEventListener("click", function(){
+                OneRoundOfRPS("Rock", getComputerChoice())
+                });
+            document.getElementById("Paper").removeEventListener("click", function(){
+                OneRoundOfRPS("Paper", getComputerChoice())
+            });
+            document.getElementById("Scissors").removeEventListener("click", function(){
+                OneRoundOfRPS("Scissors", getComputerChoice())
+            });
+        }
     }
+
+    function game() {
+}
 </script>
